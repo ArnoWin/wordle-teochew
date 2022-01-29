@@ -15,11 +15,11 @@
                     <div class="letter incorrect">O</div>
                     <div class="letter incorrect">U</div>
                     <div class="space"></div>
+                    <div class="letter incorrect">話</div>
+                    <div class="letter incorrect">圖</div>
                     <div class="letter incorrect">潮</div>
                     <div class="letter incorrect">州</div>
                     <div class="letter incorrect">話</div>
-                    <div class="letter incorrect">話</div>
-                    <div class="letter incorrect">圖</div>
                 </div>
                 <div class="header-right">
                     <div class="icon-btn stats" @click="statsOpened = true" title="Statistiques">
@@ -186,16 +186,14 @@
                             </div>
                         </div>
                         <div class="soluce" v-if="finished">
-                            <div class="subtitle">Le mot était</div>
+                            <div class="subtitle">The word was</div>
                             <h2>{{ wordOfTheDay }}</h2>
+                            <h2>meaning</h2>
+                            <h2>{{mapDefinitions.get(wordOfTheDay)}}</h2>
                             <div class="ctas">
-                                <a :href="`https://1mot.net/${this.wordOfTheDay.toLowerCase()}`" target="_blank" class="btn definition-btn">
-                                    <img class="icon" src="/icons/book.svg" />
-                                    <p>Définition</p>
-                                </a>
                                 <div class="btn sh4re-btn-anti-adblock" @click="sh4reAntiAdblock">
                                     <img class="icon" src="/icons/copy.svg" />
-                                    <p>{{resultsCopied ? 'Copié !' : 'Partager'}}</p>
+                                    <p>{{resultsCopied ? 'Copied !' : 'Share'}}</p>
                                 </div>
                             </div>
                         </div>
@@ -262,12 +260,13 @@ import LetterContainer from "./grid/LetterContainer.vue";
 import Key from "./keyboard/Key.vue";
 import words from "../assets/json/drawable-words.json";
 import playableWords from "../assets/json/playable-words.json";
+import * as definitions from "../assets/definitions.js";
 
 moment.locale('fr')
 moment.tz.setDefault('Europe/Paris')
 
 const NB_LETTERS = 6;
-const NB_ATTEMPTS = 8;
+const NB_ATTEMPTS = 6;
 const KEYBOARD_AZERTY = {
     name: 'azerty',
     content: [
@@ -293,18 +292,7 @@ const KEYBOARD_QWERTZ = {
     ]
 };
 
-function normalizeWordsAndUpperCase(word) {
-  return word.replace(/[aáàäâãạāă]/g, 'A')
-      .replace(/[eéèëêẹēĕ]/g, 'E')
-      .replace(/[iíìîịīĭ]/g, 'I')
-      .replace(/[oóòöôõọōŏ]/g, 'O')
-      .replace(/[uúùüûūŭụ]/g, 'U')
-      .replace(/[cç]/g, 'C')
-      .replace(/[mṃ]/g, 'M').toUpperCase();
-}
-let normalizedWords = [];
-
-let playableNormalizedWords = [];
+let mapDefinitions;
 
 export default {
     name: 'Game',
@@ -313,14 +301,7 @@ export default {
         Key,
     },
     data() {
-      words.forEach(function(word) {
-        normalizedWords.push(normalizeWordsAndUpperCase(word));
-      });
-
-      playableWords.forEach(function(word) {
-        playableNormalizedWords.push(normalizeWordsAndUpperCase(word));
-      });
-
+      mapDefinitions = definitions.map;
         return {
             seedrandom,
             NB_LETTERS,
@@ -330,7 +311,8 @@ export default {
             KEYBOARD_QWERTZ,
             keyboard: KEYBOARD_AZERTY,
             today: moment(),
-            normalizedWords,
+            words,
+            mapDefinitions,
             attempts: [],
             results: [],
             currentAttempt: 1,
@@ -428,10 +410,10 @@ export default {
             const formatedDate = this.today.format('YYYY-M-D');
             const seed = seedrandom(formatedDate);
             const random = seed();
-            this.wordOfTheDay = normalizedWords[Math.floor(random * (normalizedWords.indexOf('BAIBAI') + 1))];
+            this.wordOfTheDay = words[Math.floor(random * (words.indexOf('BAIBAI') + 1))];
 
             // Forcing temporaire pour éviter de changer le mot du jour de déploiement
-            if (formatedDate === '2022-1-29')
+            if (formatedDate === '2022-1-28')
                 this.wordOfTheDay = 'BAIBAI'.split('').reverse().join('')
         },
         getSavedData() {
@@ -515,7 +497,10 @@ export default {
         },
         verifyWord(attempt) {
             if (attempt.length === NB_LETTERS) {
-                if (normalizedWords.includes(attempt.join('')) || playableNormalizedWords.includes(attempt.join(''))) {
+              console.log(words);
+              console.log(this.wordOfTheDay);
+              console.log(mapDefinitions);
+                if (words.includes(attempt.join('')) || playableWords.includes(attempt.join(''))) {
                     this.verifyLetters(attempt);
                 } else {
                     this.error = 'Ce mot n\'est pas dans la liste';
@@ -535,7 +520,7 @@ export default {
             let currentResult = this.results[this.currentAttempt - 1];
 
             attempt.forEach((letter, index) => {
-                if (normalizeWordsAndUpperCase(wordToGuess[index]) === letter) {
+                if (wordToGuess[index] === letter) {
                     currentResult[index] = 'correct';
                     wordToGuess[index] = '*';
                     if (!this.correctLetters.includes(letter)) {
@@ -941,8 +926,8 @@ export default {
                         margin-top: 24px
                         margin-bottom: 8px
                         .help-letter-container
-                            width: 36px
-                            height: 36px
+                            width: 32px
+                            height: 32px
                             border: 2px solid #646464
                             box-sizing: border-box
                             margin: 2px

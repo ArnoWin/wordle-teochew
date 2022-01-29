@@ -8,13 +8,19 @@
                     </div>
                 </div>
                 <div class="game-title"><!--MORDLE-->
-                    <div class="letter correct">L</div>
+                    <div class="letter correct">U</div>
                     <div class="letter incorrect">E</div>
                     <div class="space"></div>
-                    <div class="letter partial">M</div>
+                    <div class="letter partial">D</div>
                     <div class="letter incorrect">O</div>
-                    <div class="letter incorrect">T</div>
-                </div> 
+                    <div class="letter incorrect">U</div>
+                    <div class="space"></div>
+                    <div class="letter incorrect">潮</div>
+                    <div class="letter incorrect">州</div>
+                    <div class="letter incorrect">話</div>
+                    <div class="letter incorrect">話</div>
+                    <div class="letter incorrect">圖</div>
+                </div>
                 <div class="header-right">
                     <div class="icon-btn stats" @click="statsOpened = true" title="Statistiques">
                         <img class="icon" src="/icons/stats.svg" alt="Statistiques" />
@@ -31,13 +37,13 @@
             </transition>
             <div class="grid">
                 <div class="attempt" v-for="attempt, indexA in attempts" :key="indexA" :class="{ shake: error && indexA === currentAttempt - 1 }">
-                    <LetterContainer 
-                        :letter="attempts[indexA][indexL]" 
-                        :color="results[indexA][indexL]" 
-                        :placement="letter" 
-                        :animate="animateLetter" 
+                    <LetterContainer
+                        :letter="attempts[indexA][indexL]"
+                        :color="results[indexA][indexL]"
+                        :placement="letter"
+                        :animate="animateLetter"
                         :colorBlindMode="colorBlindMode"
-                        v-for="letter, indexL in NB_LETTERS" 
+                        v-for="letter, indexL in NB_LETTERS"
                         :key="letter" />
                 </div>
             </div>
@@ -60,66 +66,75 @@
                         <div class="close-btn" @click="helpOpened = false">
                             <img class="icon" src="/icons/close.svg" alt="Fermer" />
                         </div>
-                        <h2>Comment jouer ?</h2>
+                        <h2>How to play ?</h2>
                         <div class="help-content">
-                            <p>Ce jeu reprend exactement le même concept que le <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, mais en français.</p>
-                            <p>Chaque jour, un mot de 5 lettres est choisi aléatoirement. Vous devez le deviner en 6 essais.</p>
-                            <p>À chaque essai, les lettres du mot que vous avez proposé changeront de couleur en fonction de à quel point vous êtes proche de le trouver.</p>
+                            <p>This game is based on the same concept as <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, but in teochew.</p>
+                            <p>Each guess must be a valid 6 letter word in 7 tries. Hit the enter button to submit.</p>
+                            <p>After each guess, the color of the tiles will change to show how close your guess was to the word.</p>
                             <div class="help-exemple">
                                 <div class="help-word">
                                     <div class="help-letter-container correct" :class="{ 'color-blind': colorBlindMode }">
-                                        F
+                                        G
                                     </div>
                                     <div class="help-letter-container">
-                                        R
+                                        A
                                     </div>
                                     <div class="help-letter-container">
-                                        U
+                                        M
+                                    </div>
+                                    <div class="help-letter-container">
+                                        S
                                     </div>
                                     <div class="help-letter-container">
                                         I
                                     </div>
                                     <div class="help-letter-container">
-                                        T
+                                        A
                                     </div>
                                 </div>
-                                <p>La lettre <span class="correct" :class="{ 'color-blind': colorBlindMode }">F</span> est dans le mot, à la bonne place.</p>
+                                <p>The letter <span class="correct" :class="{ 'color-blind': colorBlindMode }">G</span> is part of the word, at the right place.</p>
                                 <div class="help-word">
                                     <div class="help-letter-container">
-                                        P
+                                        G
                                     </div>
                                     <div class="help-letter-container">
-                                        O
+                                        U
                                     </div>
                                     <div class="help-letter-container partial" :class="{ 'color-blind': colorBlindMode }">
-                                        C
-                                    </div>
-                                    <div class="help-letter-container">
-                                        H
-                                    </div>
-                                    <div class="help-letter-container">
                                         E
                                     </div>
-                                </div>
-                                <p>La lettre <span class="partial" :class="{ 'color-blind': colorBlindMode }">C</span> est dans le mot, mais pas à la bonne place.</p>
-                                <div class="help-word">
                                     <div class="help-letter-container">
-                                        S
+                                        D
+                                    </div>
+                                    <div class="help-letter-container">
+                                        I
                                     </div>
                                     <div class="help-letter-container">
                                         O
                                     </div>
+                                </div>
+                                <p>The letter <span class="partial" :class="{ 'color-blind': colorBlindMode }">E</span> is part of the word, but not in the right place.</p>
+                                <div class="help-word">
                                     <div class="help-letter-container">
+                                        T
+                                    </div>
+                                    <div class="help-letter-container">
+                                        A
+                                    </div>
+                                    <div class="help-letter-container">
+                                        K
+                                    </div>
+                                    <div class="help-letter-container">
+                                        J
+                                    </div>
+                                    <div class="help-letter-container incorrect" :class="{ 'color-blind': colorBlindMode }">
                                         E
                                     </div>
                                     <div class="help-letter-container">
                                         U
                                     </div>
-                                    <div class="help-letter-container incorrect" :class="{ 'color-blind': colorBlindMode }">
-                                        R
-                                    </div>
                                 </div>
-                                <p>La lettre <span>R</span> n'est pas dans le mot.</p>
+                                <p>The letter <span>E</span> is not part of the word.</p>
                             </div>
                         </div>
                     </div>
@@ -186,7 +201,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" v-if="finished">
-                        <div class="next-in">Prochain mot dans</div>
+                        <div class="next-in">Next word in</div>
                         <div class="time">{{ countdownToNextWord }}</div>
                     </div>
                 </div>
@@ -197,22 +212,22 @@
                         <div class="close-btn" @click="settingsOpened = false">
                             <img class="icon" src="/icons/close.svg" alt="Fermer" />
                         </div>
-                        <h2>Paramètres</h2>
+                        <h2>Parameters</h2>
                         <div class="settings-content">
                             <div class="settings-item setting-toggle">
-                                <h3>Lien partagé</h3>
+                                <h3>Shared link</h3>
                                 <div class="toggle-button" @click="sharedLink = !sharedLink" :class="{ activated: sharedLink }">
                                     <div class="toggle"></div>
                                 </div>
                             </div>
                             <div class="settings-item setting-toggle">
-                                <h3>Mode daltoniens</h3>
+                                <h3>Color blind mode</h3>
                                 <div class="toggle-button" @click="colorBlindMode = !colorBlindMode" :class="{ activated: colorBlindMode }">
                                     <div class="toggle"></div>
                                 </div>
                             </div>
                             <div class="settings-item setting-button">
-                                <h3>Clavier</h3>
+                                <h3>Keyboard</h3>
                                 <div class="buttons">
                                     <button :class="{ selected: keyboard.name === KEYBOARD_AZERTY.name }" @click="keyboard = KEYBOARD_AZERTY">AZERTY</button>
                                     <button :class="{ selected: keyboard.name === KEYBOARD_QWERTY.name }" @click="keyboard = KEYBOARD_QWERTY">QWERTY</button>
@@ -220,18 +235,15 @@
                                 </div>
                             </div>
                             <div class="credits">
-                                <h2>Crédits</h2>
+                                <h2>Credits</h2>
                                 <p>
-                                    Jeu développé par <a href="https://twitter.com/louanben" target="_blank">@louanben</a>.
+                                    Game developped by <a href="https://twitter.com/NonoDarko" target="_blank">@NonoDarko</a>.
                                 </p>
                                 <p>
-                                    Concept et design librement inspirés de <strong>Wordle</strong> par <a href="https://twitter.com/powerlanguish" target="_blank">@powerlanguish</a> (Josh Wardle).
+                                    Concept and design inspired from <strong>Wordle</strong> by <a href="https://twitter.com/powerlanguish" target="_blank">@powerlanguish</a> (Josh Wardle) and from <strong>Le Mot</strong> by <a href="https://twitter.com/louanben" target="_blank">@louanben</a> (Louan).
                                 </p>
                                 <p>
-                                    Merci à <a href="https://twitter.com/Richiesque" target="_blank">Richie</a> pour son aide précieuse, ainsi qu'à <a href="https://twitter.com/Reelwens" target="_blank">Reelwens</a> pour le design !
-                                </p>
-                                <p>
-                                    Pour toute demandes, contacter <strong>@louanben</strong> sur Twitter, ou bien par mail : <strong>louanben.pro@gmail.com</strong>
+                                    For any request, contact <strong>@NonoDarko</strong> on Twitter, or by mail : <strong>arnaud.huynh@gmail.com</strong>
                                 </p>
                             </div>
                         </div>
@@ -254,8 +266,8 @@ import playableWords from "../assets/json/playable-words.json";
 moment.locale('fr')
 moment.tz.setDefault('Europe/Paris')
 
-const NB_LETTERS = 5;
-const NB_ATTEMPTS = 6;
+const NB_LETTERS = 6;
+const NB_ATTEMPTS = 8;
 const KEYBOARD_AZERTY = {
     name: 'azerty',
     content: [
@@ -281,6 +293,19 @@ const KEYBOARD_QWERTZ = {
     ]
 };
 
+function normalizeWordsAndUpperCase(word) {
+  return word.replace(/[aáàäâãạāă]/g, 'A')
+      .replace(/[eéèëêẹēĕ]/g, 'E')
+      .replace(/[iíìîịīĭ]/g, 'I')
+      .replace(/[oóòöôõọōŏ]/g, 'O')
+      .replace(/[uúùüûūŭụ]/g, 'U')
+      .replace(/[cç]/g, 'C')
+      .replace(/[mṃ]/g, 'M').toUpperCase();
+}
+let normalizedWords = [];
+
+let playableNormalizedWords = [];
+
 export default {
     name: 'Game',
     components: {
@@ -288,6 +313,14 @@ export default {
         Key,
     },
     data() {
+      words.forEach(function(word) {
+        normalizedWords.push(normalizeWordsAndUpperCase(word));
+      });
+
+      playableWords.forEach(function(word) {
+        playableNormalizedWords.push(normalizeWordsAndUpperCase(word));
+      });
+
         return {
             seedrandom,
             NB_LETTERS,
@@ -297,7 +330,7 @@ export default {
             KEYBOARD_QWERTZ,
             keyboard: KEYBOARD_AZERTY,
             today: moment(),
-            words,
+            normalizedWords,
             attempts: [],
             results: [],
             currentAttempt: 1,
@@ -395,11 +428,11 @@ export default {
             const formatedDate = this.today.format('YYYY-M-D');
             const seed = seedrandom(formatedDate);
             const random = seed();
-            this.wordOfTheDay = this.words[Math.floor(random * (this.words.indexOf('PIZZA') + 1))];
+            this.wordOfTheDay = normalizedWords[Math.floor(random * (normalizedWords.indexOf('BAIBAI') + 1))];
 
             // Forcing temporaire pour éviter de changer le mot du jour de déploiement
-            if (formatedDate === '2022-1-14')
-                this.wordOfTheDay = 'SMURA'.split('').reverse().join('')
+            if (formatedDate === '2022-1-29')
+                this.wordOfTheDay = 'BAIBAI'.split('').reverse().join('')
         },
         getSavedData() {
             if (localStorage.getItem('lastSave')) {
@@ -482,7 +515,7 @@ export default {
         },
         verifyWord(attempt) {
             if (attempt.length === NB_LETTERS) {
-                if (this.words.includes(attempt.join('')) || playableWords.includes(attempt.join(''))) {
+                if (normalizedWords.includes(attempt.join('')) || playableNormalizedWords.includes(attempt.join(''))) {
                     this.verifyLetters(attempt);
                 } else {
                     this.error = 'Ce mot n\'est pas dans la liste';
@@ -500,9 +533,9 @@ export default {
         verifyLetters(attempt) {
             let wordToGuess = this.wordOfTheDay.split('');
             let currentResult = this.results[this.currentAttempt - 1];
-            
+
             attempt.forEach((letter, index) => {
-                if (wordToGuess[index] === letter) {
+                if (normalizeWordsAndUpperCase(wordToGuess[index]) === letter) {
                     currentResult[index] = 'correct';
                     wordToGuess[index] = '*';
                     if (!this.correctLetters.includes(letter)) {
@@ -605,7 +638,7 @@ export default {
                     });
 
                     // console.log(expected, this.userResults);
-                    
+
                     let updated = false;
                     Object.entries(expected).filter(([k, v]) => this.userResults[k] !== v).forEach(([k, v]) => {
                         // console.log(`fixing "${k}" value, expected ${v}, got ${this.userResults[k]}`)
@@ -664,7 +697,7 @@ export default {
             if (this.sharedLink) {
                 sharedContent = sharedContent + '\n\n' + url;
             }
-            
+
             const errMsg = "Votre navigateur ne permet pas de copier du texte via un bouton. Une solution alternative sera proposée dans une prochaine mise à jour."
             if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') {
                 alert(errMsg);
@@ -751,7 +784,7 @@ export default {
                 justify-content: space-between
                 @media (max-height: 540px)
                     width: 62px
-            .header-left 
+            .header-left
                 width: 70px
             .icon-btn
                 display: flex
@@ -856,9 +889,9 @@ export default {
                 &::-webkit-scrollbar-thumb
                     border-radius: 4px
                     background: rgba(0, 0, 0, 0.6)
-                    &:hover 
+                    &:hover
                         background: rgba(0, 0, 0, 1)
-                
+
                 .close-btn
                     position: absolute
                     top: 24px
@@ -978,7 +1011,7 @@ export default {
                 &::-webkit-scrollbar-thumb
                     border-radius: 4px
                     background: rgba(0, 0, 0, 0.6)
-                    &:hover 
+                    &:hover
                         background: rgba(0, 0, 0, 1)
                 &.finished
                     border-bottom-left-radius: 0
@@ -1211,7 +1244,7 @@ export default {
                 &::-webkit-scrollbar-thumb
                     border-radius: 4px
                     background: rgba(0, 0, 0, 0.6)
-                    &:hover 
+                    &:hover
                         background: rgba(0, 0, 0, 1)
                 .close-btn
                     position: absolute

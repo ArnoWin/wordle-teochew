@@ -1,9 +1,9 @@
 <template>
-    <div id="letter-container" :style="{ transitionDelay: !color ? '0s' : `${0.15 + 0.3 * (placement - 1)}s`, animationDelay: `${0.3 * (placement - 1)}s` }" :class="{ 
+    <div id="letter-container" :style="{ transitionDelay: !color ? '0s' : `${0.15 + 0.3 * (placement - 1)}s`, animationDelay: `${0.3 * (placement - 1)}s` }" :class="{
         'has-letter': letter,
-        validated: color, 
-        correct: color === 'correct', 
-        partial: color === 'partial', 
+        validated: color,
+        correct: color === 'correct',
+        partial: color === 'partial',
         incorrect: color === 'incorrect',
         'no-animation': !animate,
         'color-blind': colorBlindMode,
@@ -30,8 +30,8 @@ export default {
 
 <style lang="sass" scoped>
 #letter-container
-    width: 62px
-    height: 62px
+    width: 56px
+    height: 56px
     border: 3px solid #2F2F2F
     border-radius: 6px
     box-sizing: border-box
@@ -41,21 +41,21 @@ export default {
     &.color-blind
             border-color: #919191
     @media (max-width: 380px)
-        width: 54px
-        height: 54px
+        width: 50px
+        height: 50px
     @media (max-width: 300px)
-        width: 48px
-        height: 48px
+        width: 44px
+        height: 44px
     @media (max-height: 700px)
-        width: 48px
-        height: 48px
+        width: 44px
+        height: 44px
     @media (max-height: 600px)
-        width: 40px
-        height: 40px
+        width: 36px
+        height: 36px
         border-radius: 4px
     @media (max-height: 540px)
-        width: 32px
-        height: 32px
+        width: 28px
+        height: 28px
         border-radius: 3px
     &.has-letter
         border-color: #646464

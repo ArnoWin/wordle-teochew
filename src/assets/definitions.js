@@ -595,7 +595,6 @@ map.set('DOSING', 'a text message, SMS');
 map.set('SINGHO', '(wifi, phone)');
 map.set('JOISIA', 'Thank you.');
 map.set('GAMSIA', 'Thank you.');
-map.set('BAIBAI', 'Bye');
 map.set('YIPJIN', 'to deposit money (into a bank account)');
 map.set('KIAMJE', 'to owe debts');
 map.set('JINPIO', 'check, banknote');

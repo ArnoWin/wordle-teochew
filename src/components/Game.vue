@@ -47,6 +47,7 @@
                         :key="letter" />
                 </div>
             </div>
+          <div class="grid"><h2>{{attempts[this.currentAttempt - 1].join('')}} {{mapChineses.get(attempts[this.currentAttempt - 1].join(''))}}</h2></div>
             <div class="keyboard">
                 <div class="keyboard-line" v-for="line, index in keyboard.content" :key="index">
                     <Key
@@ -60,6 +61,7 @@
                     />
                 </div>
             </div>
+
             <transition name="fadeup">
                 <div class="help-modal" v-if="helpOpened">
                     <div class="help-modal-content">
@@ -188,8 +190,8 @@
                         <div class="soluce" v-if="finished">
                             <div class="subtitle">The word was</div>
                             <h2>{{ wordOfTheDay }}</h2>
-                            <h2>meaning</h2>
-                            <h2>{{mapDefinitions.get(wordOfTheDay)}}</h2>
+                            <h3>meaning</h3>
+                            <h2>{{mapDefinitions.get(wordOfTheDay)}} {{mapChineses.get(wordOfTheDay)}}</h2>
                             <div class="ctas">
                                 <div class="btn sh4re-btn-anti-adblock" @click="sh4reAntiAdblock">
                                     <img class="icon" src="/icons/copy.svg" />
@@ -261,6 +263,7 @@ import Key from "./keyboard/Key.vue";
 import words from "../assets/json/drawable-words.json";
 import playableWords from "../assets/json/playable-words.json";
 import * as definitions from "../assets/definitions.js";
+import * as chinese from "../assets/chinese.js";
 
 moment.locale('fr')
 moment.tz.setDefault('Europe/Paris')
@@ -292,7 +295,8 @@ const KEYBOARD_QWERTZ = {
     ]
 };
 
-let mapDefinitions;
+let mapDefinitions = definitions.map;
+let mapChineses = chinese.map;
 
 export default {
     name: 'Game',
@@ -301,7 +305,6 @@ export default {
         Key,
     },
     data() {
-      mapDefinitions = definitions.map;
         return {
             seedrandom,
             NB_LETTERS,
@@ -313,6 +316,7 @@ export default {
             today: moment(),
             words,
             mapDefinitions,
+            mapChineses,
             attempts: [],
             results: [],
             currentAttempt: 1,
@@ -497,9 +501,6 @@ export default {
         },
         verifyWord(attempt) {
             if (attempt.length === NB_LETTERS) {
-              console.log(words);
-              console.log(this.wordOfTheDay);
-              console.log(mapDefinitions);
                 if (words.includes(attempt.join('')) || playableWords.includes(attempt.join(''))) {
                     this.verifyLetters(attempt);
                 } else {
@@ -675,7 +676,7 @@ export default {
                     }
                 }).join('');
             }).join('\n');
-            const url = "wordle-teochew.herokuapp.com";
+            const url = "http://wordle-teochew.herokuapp.com";
 
             let sharedContent = title + schema;
 

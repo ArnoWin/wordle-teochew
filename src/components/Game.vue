@@ -3,7 +3,7 @@
         <header>
             <div class="header-container">
                 <div class="header-left">
-                    <div class="icon-btn help" @click="helpOpened = true" title="Aide">
+                    <div class="icon-btn help" @click="helpOpened = true" title="Help">
                         <img class="icon" src="/icons/help.svg" alt="Aide" />
                     </div>
                 </div>
@@ -146,27 +146,27 @@
                         <div class="close-btn" @click="statsOpened = false">
                             <img class="icon" src="/icons/close.svg" alt="Fermer" />
                         </div>
-                        <h2>Statistiques</h2>
+                        <h2>Statistics</h2>
                         <div class="stats">
                             <div class="stats-content">
                                 <div class="stats-line">
                                     <div class="stats-item games-played">
                                         <p class="stat-item-figure">{{ userResults.nbGames }}</p>
-                                        <p class="stat-item-label">Parties</p>
+                                        <p class="stat-item-label">Games</p>
                                     </div>
                                     <div class="stats-item win-rate">
                                         <p class="stat-item-figure">{{ Math.round((userResults.nbGames > 0 ? userResults.nbWins / userResults.nbGames : 0) * 100) }}</p>
-                                        <p class="stat-item-label">Victoires (%)</p>
+                                        <p class="stat-item-label">Win (%)</p>
                                     </div>
                                 </div>
                                 <div class="stats-line">
                                     <div class="stats-item current-streak">
                                         <p class="stat-item-figure">{{ userResults.currentStreak }}</p>
-                                        <p class="stat-item-label">Série actuelle</p>
+                                        <p class="stat-item-label">Current streak</p>
                                     </div>
                                     <div class="stats-item current-streak">
                                         <p class="stat-item-figure">{{ userResults.bestStreak }}</p>
-                                        <p class="stat-item-label">Meilleure série</p>
+                                        <p class="stat-item-label">Best streak</p>
                                     </div>
                                 </div>
                             </div>
@@ -663,7 +663,7 @@ export default {
         },
         // Shitty function name to avoid shitty adblockers
         sh4reAntiAdblock() {
-            const title = `Le Mot (@WordleFR) #${this.getWordID()} ${this.currentAttempt <= NB_ATTEMPTS ? this.currentAttempt : '💀' }/${NB_ATTEMPTS}\n\n`;
+            const title = `Ue Dou (@WordleTeochew) #${this.getWordID()} ${this.currentAttempt <= NB_ATTEMPTS ? this.currentAttempt : '💀' }/${NB_ATTEMPTS}\n\n`;
             let schema = this.results.slice(0, this.currentAttempt).map((result) => {
                 return result.map((letter) => {
                     if (letter === 'correct') {
@@ -675,7 +675,7 @@ export default {
                     }
                 }).join('');
             }).join('\n');
-            const url = "wordle.louan.me";
+            const url = "wordle-teochew.herokuapp.com";
 
             let sharedContent = title + schema;
 

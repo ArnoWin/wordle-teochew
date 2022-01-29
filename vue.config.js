@@ -24,5 +24,8 @@ module.exports = {
       // Et on n'a pas besoin des autres langues de momentjs
       new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /fr/),
     ]
+  },
+  devServer: {
+    disableHostCheck: true
   }
 };

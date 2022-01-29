@@ -411,10 +411,14 @@ export default {
     },
     methods: {
         async getWordOfTheDay() {
+
             const formatedDate = this.today.format('YYYY-M-D');
             const seed = seedrandom(formatedDate);
             const random = seed();
-            this.wordOfTheDay = words[Math.floor(random * (words.indexOf('BAIBAI') + 1))];
+
+            const randomIndex = Math.floor((random * 1000) * (words.indexOf('BAIBAI') + 1));
+            const indexOfTheWord = randomIndex <= words.length ? randomIndex : randomIndex - words.length;
+            this.wordOfTheDay = words[indexOfTheWord];
 
             // Forcing temporaire pour éviter de changer le mot du jour de déploiement
             if (formatedDate === '2022-1-28')

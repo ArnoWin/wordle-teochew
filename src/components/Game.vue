@@ -668,7 +668,7 @@ export default {
             return attemptPercent;
         },
         getWordID() {
-            return this.today.clone().startOf('day').diff(moment("2022-01-10T00:00:00"), 'days') + 1
+            return this.today.clone().startOf('day').diff(moment("2022-01-30T00:00:00"), 'days') + 1
         },
         // Shitty function name to avoid shitty adblockers
         sh4reAntiAdblock() {

@@ -35,6 +35,8 @@
             <transition name="fade">
                 <div class="error" v-if="error">{{ error }}</div>
             </transition>
+
+          <div class="grid" v-if="attempts[this.currentAttempt - 1] !== undefined"><h2>{{attempts[this.currentAttempt - 1].join('')}} {{mapChineses.get(attempts[this.currentAttempt - 1].join(''))}}</h2></div>
             <div class="grid">
                 <div class="attempt" v-for="attempt, indexA in attempts" :key="indexA" :class="{ shake: error && indexA === currentAttempt - 1 }">
                     <LetterContainer
@@ -47,7 +49,6 @@
                         :key="letter" />
                 </div>
             </div>
-          <div class="grid"><h2>{{attempts[this.currentAttempt - 1].join('')}} {{mapChineses.get(attempts[this.currentAttempt - 1].join(''))}}</h2></div>
             <div class="keyboard">
                 <div class="keyboard-line" v-for="line, index in keyboard.content" :key="index">
                     <Key

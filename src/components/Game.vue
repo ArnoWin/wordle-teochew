@@ -202,6 +202,18 @@
                                     <p>{{resultsCopied ? 'Copied !' : 'Share'}}</p>
                                 </div>
                             </div>
+                          <div class="download-link ctas" >
+                            <div class="download-btn">
+                              <a :href="`https://play.google.com/store/apps/details?id=com.tcknow.whattcsay3&hl=fr&gl=US`" target="_blank" class="btn definition-btn">
+                                <img class="download" src="/icons/google-play.svg" />
+                              </a>
+                            </div>
+                            <div class="download-btn">
+                              <a :href="`https://apps.apple.com/fr/app/whattcsay3/id1551477228`" target="_blank" class="btn definition-btn">
+                                <img class="download" src="/icons/mac-os.svg" />
+                              </a>
+                            </div>
+                          </div>
                         </div>
                     </div>
                     <div class="modal-footer" v-if="finished">
@@ -270,7 +282,7 @@ import * as definitions from "../assets/definitions.js";
 import * as chinese from "../assets/chinese.js";
 
 moment.locale('fr')
-moment.tz.setDefault('Europe/Paris')
+moment.tz.guess()
 
 const NB_LETTERS = 6;
 const NB_ATTEMPTS = 6;
@@ -1063,20 +1075,20 @@ export default {
                                 flex-direction: column
                                 align-items: center
                                 justify-content: center
-                                height: 80px
+                                height: 60px
                                 margin-right: 8px
                                 background-color: #0E0E0F
                                 border-radius: 6px
                                 &:last-child
                                     margin-right: 0
                                 .stat-item-figure
-                                    font-size: 28px
+                                    font-size: 22px
                                     font-weight: bold
                                     color: #3EAA42
                                 .stat-item-label
                                     display: flex
                                     align-items: center
-                                    height: 30px
+                                    height: 24px
                                     font-size: 12px
                                     color: white
                                     margin: 0 8px
@@ -1131,6 +1143,61 @@ export default {
                     flex-direction: column
                     margin-top: 16px
                     width: 100%
+                    .download-link
+                      display: flex
+                      flex-direction: row
+                      justify-content: center
+                      margin-top: 16px
+                      .download-btn
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        .btn
+                          display: flex
+                          align-items: center
+                          justify-content: center
+                          width: 40px
+                          height: 40px
+                          border-radius: 5px
+                          margin: 0 4px
+                          color: white
+                          text-decoration: none
+                          font-size: 14px
+                          font-weight: 700
+                          cursor: pointer
+                          user-select: none
+                          .icon
+                            height: 14px
+                            margin-right: 8px
+                          &.definition-btn
+                            background-color: #3EAA42
+                            border-bottom: 2px solid #2B2B2B
+                            &:hover
+                              background-color: #44b848
+                              border-color: #313131
+                            &:active
+                              background-color: #ffffff
+                              border-color: #ffffff
+                          // Shitty class name to avoid shitty adblocker
+                          &.sh4re-btn-anti-adblock
+                            background-color: #3EAA42
+                            border-bottom: 2px solid #157D19
+                            &:hover
+                              background-color: #44b848
+                              border-color: #1c9320
+                            &:active
+                              background-color: #157D19
+                              border-color: #157D19
+                      .download-icon
+                        width: 30px
+                        height: 30px
+                        margin-left: 15px
+                        margin-right: 15px
+                        transition: all .3s
+                      .download
+                        width: 30px
+                        height: 30px
+
                     .subtitle
                         font-size: 12px
                         font-weight: 700
@@ -1265,6 +1332,7 @@ export default {
                     .icon
                         height: 10px
                         transition: all .3s
+
                 h2
                     color: white
                     font-size: 20px
@@ -1355,6 +1423,7 @@ export default {
                                 text-decoration: none
                                 &:hover
                                     text-decoration: underline
+
 
 @keyframes shake
     0%

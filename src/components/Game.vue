@@ -341,7 +341,7 @@ export default {
             error: '',
             correctLetters: [],
             partialLetters: [],
-            incorrectLetters: [],
+            incorrectLetters: ['F', 'Q', 'R', 'V', 'W', 'X'],
             won: false,
             finished: false,
             statsOpened: false,

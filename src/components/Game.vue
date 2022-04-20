@@ -437,8 +437,8 @@ export default {
             this.wordOfTheDay = words[indexOfTheWord];
 
             // Forcing temporaire pour éviter de changer le mot du jour de déploiement
-            if (formatedDate === '2022-1-28')
-                this.wordOfTheDay = 'BAIBAI'.split('').reverse().join('')
+            if (formatedDate === '2022-4-22')
+                this.wordOfTheDay = 'GAOLAK'.split('').join('')
         },
         getSavedData() {
             if (localStorage.getItem('lastSave')) {

@@ -6,7 +6,7 @@ The idea, the concept and the design were, for the most part, taken from the ori
 
 You can find Le Mot at this URL : [wordle.louan.me](https://wordle.louan.me)
 
-You can play Ue Dou [here](https://wordle-teochew.herokuapp.com/)
+You can play Ue Dou [here](https://uedou.jeunesteochew.com)
 
 ## Contacts
 

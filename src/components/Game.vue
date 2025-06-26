@@ -696,7 +696,7 @@ export default {
                     }
                 }).join('');
             }).join('\n');
-            const url = "http://wordle-teochew.herokuapp.com";
+            const url = "https://uedou.jeunesteochew.com";
 
             let sharedContent = title + schema;
 
